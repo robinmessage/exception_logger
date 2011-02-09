@@ -24,7 +24,16 @@ and then run:
 
   bundle install
 
-Inside your ApplicationController:
+=== Gem Dependencies
+
+Please check if all those requirements are satisfied on your environment.
+
+* i18n >= 0.4.1
+* meta_where >= 0.5.2 # (used to avoid SQL inside the CODE)
+* will_paginate >= 3.0.pre2 # (used for pagination)
+* rails >= 3.0.0
+
+=== Inside your ApplicationController:
 
   include ExceptionLogger::ExceptionLoggable # loades the module
   rescue_from Exception, :with => :log_exception_handler # tells rails to forward the 'Exception' (you can change the type) to the handler of the module
