@@ -42,11 +42,16 @@ class LoggedExceptionsController < ApplicationController
   end
 
   def show
-    @exception = LoggedException.find params[:id]
+    @exception = LoggedException.where(:id => params[:id]).first
+    
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def destroy
-    @exception = LoggedException.find params[:id]
+    @exception = LoggedException.where(:id => params[:id]).first
     @exception.destroy
   end
 
