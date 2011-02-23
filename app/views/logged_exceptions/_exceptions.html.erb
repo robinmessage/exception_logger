@@ -1,6 +1,6 @@
 <div id="exceptions">
   <div class="pages">
-    <%= link_to 'Delete Visible', { :action => 'destroy_all' }, :class => 'delete_visible' %>
+    <%= link_to 'Delete Visible', { :action => 'destroy_all' }, :class => 'delete_visible_link' %>
     <% if @exceptions.total_pages > 1 %>
       :: Pages: <strong><%= pagination_remote_links @exceptions %></strong>
     <% end %>
@@ -18,11 +18,11 @@
       <% @exceptions.each do |exception| %>
         <tr id="<%= dom_id(exception) %>" class="<%= cycle("eor", "") %> exception">
           <td>
-            <div class="expclass"><%= link_to exception.name, {:action => "show", :id => exception} %></div>
+            <div class="expclass"><%= link_to exception.name, {:action => "show", :id => exception}, :class => 'show_link' %></div>
             <span class="message"><%= h exception.message %></span>
           </td>
           <td class="time"><%= pretty_exception_date(exception) %></td>
-          <td><%= link_to 'Delete', { :action => 'destroy', :id => exception },:method => :delete, :remote => :true , :class => "util" %></td>
+          <td><%= link_to 'Delete', { :action => 'destroy', :id => exception },:method => :delete, :class => "util delete_link" %></td>
         </tr>
       <% end %>
     </tbody>
