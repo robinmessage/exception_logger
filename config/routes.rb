@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     collection do
       post :query
       post :destroy_all
+      get :feed
     end
   end
-  
 end
