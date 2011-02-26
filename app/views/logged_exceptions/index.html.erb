@@ -24,7 +24,7 @@
     <li><%= link_to t(".last_30_days"), {:action => 'query', :date_ranges_filter => "30"}, :title => "30", :class => 'filter_link' %></li>
   </ul>
   <div id="search">
-    <%= form_tag "logged_exceptions/query",:remote => true, :id => 'query-form' %>
+    <%= form_tag "logged_exceptions/query", :id => 'query-form' %>
     <div>
       <%= text_field_tag :query, "", :size => 17 %>
       <%= submit_tag :Find %>

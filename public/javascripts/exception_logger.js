@@ -38,5 +38,15 @@ $(function () {
 		});		
 		return false;
 	});
+	
+	$('#query-form :submit').live('click', function(event) {
+		$.ajax({
+			url: $("#query-form").attr("action"),
+			type: 'POST',
+			data: $("#query-form").serialize(),
+			dataType: 'script'
+		});		
+		return false;
+	});
 });
 
