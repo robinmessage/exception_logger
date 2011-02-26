@@ -2,7 +2,7 @@
   <div class="pages">
     <%= link_to 'Delete Visible', { :action => 'destroy_all' }, :class => 'delete_visible_link' %>
     <% if @exceptions.total_pages > 1 %>
-      :: Pages: <strong><%= pagination_remote_links @exceptions %></strong>
+      :: Pages: <strong><%= will_paginate @exceptions, :style => 'display:inline' %></strong>
     <% end %>
   </div>
   <h1>Exceptions <%= raw "<span>(filtered)</span>" if filtered? %> </h1>
@@ -29,7 +29,7 @@
   </table>
   <% if @exceptions.total_pages > 1 %>
     <div class="pages pages-bottom">
-      Pages: <strong><%= pagination_remote_links @exceptions %></strong>
+      Pages: <strong><%= will_paginate @exceptions, :style => 'display:inline' %></strong>
     </div>
   <% end %>
 </div> <!-- #exceptions -->
