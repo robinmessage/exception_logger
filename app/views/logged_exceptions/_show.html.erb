@@ -1,7 +1,7 @@
 <div class="tools">
-  <%= link_to 'Delete', { :action => 'destroy', :id => @exception }, :method => :delete, :remote => :true, :class => "util" %>
+  <%= link_to 'Delete', { :action => 'destroy', :id => @exception }, :class => "util delete_link" %>
   <span class="pipe">|</span>
-  <%= link_to "Close", logged_exceptions_url, :remote => true, :onclick => "$('showpage').style.display='none'; return false;", :class => "util" %>
+  <%= link_to "Close", "#", :class => "util close_link" %>
 </div>
 
 <div class="date">

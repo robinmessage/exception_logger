@@ -12,7 +12,6 @@ class LoggedExceptionsController < ApplicationController
     query
   end
 
-
   def query
     exceptions = LoggedException.sorted
     unless params[:id].blank?
@@ -28,31 +27,45 @@ class LoggedExceptionsController < ApplicationController
       exceptions = exceptions.by_exception_class(params[:exception_names_filter])
     end
     unless params[:controller_actions_filter].blank?
-      c_a_params = params[:controller_actions_filter].split('/').collect(&:downcase)
-      exceptions = exceptions.by_controller(c_a_params.first)
-      exceptions = exceptions.by_action(c_a_params.last)
+      c_a_params = params[:controller_actions_filter].split('/')
+      controller_filter = c_a_params.first.underscore
+      action_filter = c_a_params.last.downcase
+      exceptions = exceptions.by_controller(controller_filter)
+      exceptions = exceptions.by_action(action_filter)
     end
     @exceptions = exceptions.paginate(:per_page => 30, :page => params[:page])
 
     respond_to do |format|
       format.html { redirect_to :action => 'index' unless action_name == 'index' }
       format.js
-      format.xml
+    end
+  end
+  
+  def feed
+    @exceptions = LoggedException.all
+
+    respond_to do |format|
+      format.rss { render :layout => false }
     end
   end
 
   def show
-    @exception = LoggedException.find params[:id]
+    @exception = LoggedException.where(:id => params[:id]).first
+    
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def destroy
-    @exception = LoggedException.find params[:id]
+    @exception = LoggedException.where(:id => params[:id]).first
     @exception.destroy
   end
 
   def destroy_all
     LoggedException.delete_all(:id => params[:ids]) unless params[:ids].blank?
-    query
+    query 
   end
 
   private

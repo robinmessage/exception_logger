@@ -1,8 +1,8 @@
 <div id="exceptions">
   <div class="pages">
-    <%= link_to 'Delete Visible', { :action => 'destroy_all' }, :method => :post, :remote => true, :onclick => "ExceptionLogger.deleteAllRequest()" %>
+    <%= link_to 'Delete Visible', { :action => 'destroy_all' }, :class => 'delete_visible_link' %>
     <% if @exceptions.total_pages > 1 %>
-      :: Pages: <strong><%= pagination_remote_links @exceptions %></strong>
+      :: Pages: <strong><%= will_paginate @exceptions, :style => 'display:inline' %></strong>
     <% end %>
   </div>
   <h1>Exceptions <%= raw "<span>(filtered)</span>" if filtered? %> </h1>
@@ -18,18 +18,18 @@
       <% @exceptions.each do |exception| %>
         <tr id="<%= dom_id(exception) %>" class="<%= cycle("eor", "") %> exception">
           <td>
-            <div class="expclass"><%= link_to exception.name, {:action => "show", :id => exception}, :remote => true %></div>
+            <div class="expclass"><%= link_to exception.name, {:action => "show", :id => exception}, :class => 'show_link' %></div>
             <span class="message"><%= h exception.message %></span>
           </td>
           <td class="time"><%= pretty_exception_date(exception) %></td>
-          <td><%= link_to 'Delete', { :action => 'destroy', :id => exception },:method => :delete, :remote => :true , :class => "util" %></td>
+          <td><%= link_to 'Delete', { :action => 'destroy', :id => exception }, :method => :delete, :class => "util delete_link" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <% if @exceptions.total_pages > 1 %>
     <div class="pages pages-bottom">
-      Pages: <strong><%= pagination_remote_links @exceptions %></strong>
+      Pages: <strong><%= will_paginate @exceptions, :style => 'display:inline' %></strong>
     </div>
   <% end %>
 </div> <!-- #exceptions -->
