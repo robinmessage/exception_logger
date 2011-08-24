@@ -12,7 +12,7 @@ begin
     gem.files = Dir["{lib}/**/*", "{app}/**/*", "{config}/**/*", "{public}/**/*"]
     gem.test_files = Dir["{test}/**/*"]
     gem.add_dependency 'rails', '>=3.0.0'
-    gem.add_dependency "will_paginate", ">= 3.0.pre2"
+    gem.add_dependency "kaminari"
     gem.add_dependency "meta_where", ">= 0.5.2"
     gem.add_dependency "i18n", ">= 0.4.1"
     gem.add_development_dependency "shoulda", ">= 2.11.3"

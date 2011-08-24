@@ -1,6 +1,6 @@
 require "exception_logger"
 require "rails"
-require "will_paginate"
+require "kaminari"
 require "i18n"
 require "meta_where"
 
