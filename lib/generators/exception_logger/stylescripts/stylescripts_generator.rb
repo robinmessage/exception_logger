@@ -2,7 +2,7 @@ require 'rails/generators'
 
 module ExceptionLogger
   class StylescriptsGenerator < Rails::Generators::Base
-    desc "Copies exception_logger.css to public/stylesheets/ and copies exception_logger.js to public/javascripts/"
+    desc "Copies exception_logger.css to app/assets/stylesheets/ and copies exception_logger.js to app/assets/javascripts/"
 
     def self.source_root
       # Set source directory for the templates to the rails2 generator template directory
@@ -15,10 +15,10 @@ module ExceptionLogger
 
     def copy_files
       empty_directory 'public/stylesheets'
-      template 'stylesheets/exception_logger.css', 'public/stylesheets/exception_logger.css'
+      template 'stylesheets/exception_logger.css', 'app/assets/stylesheets/exception_logger.css'
 
       empty_directory 'public/javascripts'
-      template 'javascripts/exception_logger.js', 'public/javascripts/exception_logger.js'
+      template 'javascripts/exception_logger.js', 'app/assets/javascripts/exception_logger.js'
     end
   end
 end
