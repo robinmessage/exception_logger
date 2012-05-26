@@ -1,6 +1,6 @@
 require "exception_logger"
 require "rails"
-require "kaminari"
+require "will_paginate"
 require "i18n"
 require "squeel"
 
