@@ -33,7 +33,7 @@ class LoggedExceptionsController < ApplicationController
       exceptions = exceptions.by_controller(controller_filter)
       exceptions = exceptions.by_action(action_filter)
     end
-    @exceptions = exceptions.page(params[:page]).per(30)
+    @exceptions = exceptions.paginate(:page => params[:page], :per_page => 25)
 
     respond_to do |format|
       format.html { redirect_to :action => 'index' unless action_name == 'index' }

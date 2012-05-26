@@ -3,7 +3,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "exception_logger"
+    gem.name = "r3_exception_logger"
     gem.summary = "Exception Logger for Rails 3"
     gem.description = "Logs exceptions inside a database table. Now available as gem for Rails3 (previously a plugin for Rails2)"
     gem.email = "roland.guem@gmail.com"
@@ -37,7 +37,7 @@ ENV['BUNDLE_GEMFILE'] = File.dirname(__FILE__) + '/test/rails_root/Gemfile'
 #require 'rake'
 require 'rake/testtask'
 require 'cucumber/rake/task'
-require 'spec/rake/spectask'
+#require 'spec/rake/spectask'
 
 namespace :test do
   Rake::TestTask.new(:basic => %w(test:generator:rails_setup test:generator:exception_migration)) do |task|
