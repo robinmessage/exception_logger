@@ -34,9 +34,18 @@ module ExceptionLogger
       #    :exc_date => "%b %d, %Y",
       #    :exc_time => "%l:%M %p"
       #  })
+
+      target.class_eval do
+        cattr_accessor :exception_loggable_except
+      end
     end
   
     module ClassMethods
+      def log_exception_without(klasses)
+        alasses = [klasses] if klasses.kind_of?(Class)
+        self.exception_loggable_except = klasses
+      end
+
       def consider_local(*args)
         local_addresses.concat(args.flatten.map { |a| IPAddr.new(a) })
       end
@@ -73,7 +82,10 @@ module ExceptionLogger
 
     def rescue_action(exception)
       status = response_code_for_rescue(exception)
-      log_exception(exception) if status != :not_found
+      self.exception_loggable_except ||= []
+      if status != :not_found && !self.exception_loggable_except.include?(exception.class)
+        log_exception(exception)
+      end
       super
     end
 

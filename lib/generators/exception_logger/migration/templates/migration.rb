@@ -10,6 +10,8 @@ class AddLoggedExceptionTable < ActiveRecord::Migration
       t.text :request
       t.datetime :created_at
     end
+    add_index :logged_exceptions, :exception_class
+    add_index :logged_exceptions, [:controller_name, :action_name]
   end
 
   def self.down
