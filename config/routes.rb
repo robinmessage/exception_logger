@@ -1,4 +1,6 @@
 ExceptionLogger::Engine.routes.draw do
+  root :to => "logged_exceptions#index"
+
   resources :logged_exceptions do
     collection do
       post :query
