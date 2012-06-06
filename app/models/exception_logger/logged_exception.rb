@@ -1,5 +1,7 @@
 module ExceptionLogger
   class LoggedException < ActiveRecord::Base
+    # FIXME
+    set_table_name "logged_exceptions"
     
     attr_accessible :exception_class, :controller_name, :action_name, :message, :backtrace, :request
 
