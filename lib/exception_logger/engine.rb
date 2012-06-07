@@ -4,7 +4,7 @@ module ExceptionLogger
 
     if Rails.version > "3.1"
       initializer "ExceptionLogger precompile hook" do |app|
-        app.config.assets.precompile += ['exception_logger.js', 'exception_logger.css']
+        app.config.assets.precompile += ['exception_logger/exception_logger.js', 'exception_logger/exception_logger.css']
       end
     end
   end

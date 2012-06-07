@@ -3,8 +3,8 @@
   <head>
     <title><%= content_for?(:title) ? yield(:title) : "Exception Logger" %></title>
     <meta charset="UTF-8" />
-    <%= javascript_include_tag 'exception_logger/application' %>
-    <%= stylesheet_link_tag 'exception_logger/application'  %>
+    <%= javascript_include_tag 'exception_logger/exception_logger' %>
+    <%= stylesheet_link_tag 'exception_logger/exception_logger'  %>
     <%= csrf_meta_tag %>
     
     <%= auto_discovery_link_tag(:rss, {:action => "feed"}, {:title => "RSS Feed"}) %>
