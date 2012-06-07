@@ -1,6 +1,5 @@
 module ExceptionLogger
   class LoggedExceptionsController < ApplicationController
-
     cattr_accessor :application_name
 
     #ApplicationController.class_eval do
