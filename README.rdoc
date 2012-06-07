@@ -6,10 +6,14 @@ If you're looking for the original gem, it is available at https://github.com/Qu
 
 == Installation
 
+Add the gem to your Gemfile:
+
+  gem "exception_logger", :git => "git://github.com/alexbevi/exception_logger.git"
+
+Then install and run the necessary migrations. Note that if you've already been using the exception_logger gem, there's no need to follow this step.
+
   rake exception_logger:install:migrations
   rake db:migrate
-
-If you've already been using the exception_logger gem, there's no need to run the migrations.
 
 == Configuration
 
