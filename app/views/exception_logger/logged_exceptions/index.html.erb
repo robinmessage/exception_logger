@@ -29,7 +29,7 @@
   </ul>
 
   <div id="search">
-    <%= form_tag "logged_exceptions/query", :id => 'query-form' %>
+    <%= form_tag query_url, :id => "query-form" %>
     <div>
       <%= text_field_tag :query, "", :size => 17 %>
       <%= submit_tag :Find %>
