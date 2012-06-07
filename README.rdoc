@@ -1,76 +1,30 @@
-= Exception Logger for Rails3
+= Exception Logger Engine for Rails 3
 
-You liked the exception logger from http://github.com/defunkt/exception_logger for Rails2?
+This is a fork of the Rails 3 implementation of exception_logger that implements the functionality as a mountable engine.
 
-You want to have the same functionallity using Rails3?
+If you're looking for the original gem, it is available at https://github.com/QuBiT/exception_logger.
 
-You want to upgrade your Rails2 application and the old plugin breaks?
+== Installation
 
-You ...
+`rake exception_logger:install:migrations`
+`rake db:migrate`
 
-Then just use the exception_logger gem instead and tell your friends to do the same ;)
+If you've already been using the exception_logger gem, there's no need to run the migrations.
 
-== Hosted on RubyGems.org
+== Configuration
 
-This gem is hosted on RubyGems.org: http://rubygems.org/gems/exception_logger
+Add the following to any controller you want to have logged (or ApplicationController to log all exceptions)
 
-== Install
+  include ExceptionLogger::ExceptionLoggable 
+  rescue_from Exception, :with => :log_exception_handler
 
-Inside your Gemfile:
+Now, in your routes.rb:
+  
+  mount ExceptionLogger::Engine => "/exceptions"
 
-  gem "exception_logger", :require => "exception_logger"
+Note that "/exceptions" can be anything you like ;)
 
-and then run:
-
-  bundle install
-
-=== Gem Dependencies
-
-Please check if all those requirements are satisfied on your environment.
-
-* i18n >= 0.4.1
-* meta_where >= 0.5.2 # (used to avoid SQL inside the CODE)
-* will_paginate >= 3.0.pre2 # (used for pagination)
-* rails >= 3.0.0
-
-=== Inside your ApplicationController:
-
-  include ExceptionLogger::ExceptionLoggable # loades the module
-  rescue_from Exception, :with => :log_exception_handler # tells rails to forward the 'Exception' (you can change the type) to the handler of the module
-
-== Generators
-
-=== Database Setup
-
-Use
-
-  rails g exception_logger:migration
-
-This will create a database migration
-
-  TIMESTAMP_add_exception_table.rb
-
-inside db/migrations
-
-=== Stylesheet and Javascript
-
-You can copy the stylesheet and javascript to your applications public directory by using
-
-  rails g exception_logger:stylescripts
-
-This allows you to customize those files.
-
-This will be also necessary if you use a webserver ( e.g. passenger+nginx ) in front of rails which does the static file handling for you.
-
-== Routing
-
-The gem is preconfigured to extend your routes automatically. You can access the logged exceptions by pointing to "/logged_exceptions" inside your application.
-
-You can use the rake tasks
-
-  rake routes
-
-to see and check the routes.
+  TODO: Review the following sections and update as necessary
 
 == Exception Notification
 
@@ -113,18 +67,6 @@ and (if you use declarative_authorization) add this to your authorization_rules.
     has_permission_on :logged_exceptions, :to => :manage
     ...
 
-== Upgrading from the old plugin
-
-If you have used the exception_logger plugin for your rails2 application and want to migrate to rails 3 then:
-
-* Remove the old plugin (just delete the vendor/plugins/exception_logger folder)
-* Install the new gem version (see Install)
-* DONE. (if I forgot something, then let me know.)
-
-== Legacy
-
-For more and older details read the README.old File.
-
 == Testing & Development
 
 Testing should always start before the actual development.
@@ -139,16 +81,9 @@ This rake task will create a rails app inside the test directory called rails_ro
 
 The generator which generates the rails app in your test directory will skip over every existing file, hence if you want to customize a file, then just add/create it.
 
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
-
 == Copyright
 
-Copyright (c) 2010 Roland Guem. See LICENSE for details.
+Copyright (c) 2010 Roland Guem.
+Copyright (c) 2012 Alex Bevilacqua.
+
+See LICENSE for details.
