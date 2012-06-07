@@ -28,8 +28,6 @@ Now, in your routes.rb:
 
 Note that "/exceptions" can be anything you like ;)
 
-  TODO: Review the following sections and update as necessary
-
 == Exception Notification
 
 === by Email
@@ -55,7 +53,7 @@ Example uses the declarative_authorization gem
 in config/environment/production.rb:
 
   config.after_initialize do
-    LoggedExceptionsController.class_eval do
+    ExceptionLogger::LoggedExceptionsController.class_eval do
       # include any custom auth modules you need
       # (declarative authorization gem used)
       filter_resource_access
@@ -68,7 +66,7 @@ in config/environment/production.rb:
 and (if you use declarative_authorization) add this to your authorization_rules.rb file:
 
   role :admin do
-    has_permission_on :logged_exceptions, :to => :manage
+    has_permission_on :exception_logger_logged_exceptions, :to => :manage
     ...
 
 == Testing & Development
