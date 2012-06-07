@@ -10,6 +10,9 @@
 <h1><%= @exception.name %></h1>
 
 <h2>Request</h2>
+<%- if @exception.user_id %>
+<%= user_name(@exception.user_id) %>
+<% end %>
 <%= pretty_format(@exception.request) %>
 
 <h2>Backtrace</h2>

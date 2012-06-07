@@ -96,8 +96,11 @@ module ExceptionLogger
       when Symbol then send(deliverer)
       when Proc   then deliverer.call(self)
       end
+      
+      user = ExceptionLogger::LoggedExceptionsController.creator
+      user = send(user.to_sym) unless user.nil?
 
-      LoggedException.create_from_exception(self, exception, data)
+      LoggedException.create_from_exception(self, exception, data, user)
     end
   end
 end

@@ -38,5 +38,19 @@ module ExceptionLogger
         simple_format(text).html_safe
       end
     end
+
+    def user_name(id)
+      begin
+        klass = ExceptionLogger::LoggedExceptionsController.creator
+        klass = send(klass.to_sym).class
+        record = klass.find(id)
+        fn = ExceptionLogger::LoggedExceptionsController.creator_name
+        if record.respond_to?(fn)
+          return record.send(fn.to_sym)
+        end
+      rescue
+        return ""
+      end
+    end
   end
 end

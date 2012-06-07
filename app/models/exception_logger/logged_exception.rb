@@ -3,10 +3,24 @@ module ExceptionLogger
     # FIXME
     self.table_name = "logged_exceptions"
     
-    attr_accessible :exception_class, :controller_name, :action_name, :message, :backtrace, :request
+    attr_accessible :exception_class, 
+                    :controller_name, 
+                    :action_name, 
+                    :message, 
+                    :backtrace, 
+                    :request,
+                    :user_id
 
     class << self
-      def create_from_exception(controller, exception, data)
+      def create_from_exception(controller, exception, data, user)
+        uid = if user.nil?
+          nil
+        elsif user.respond_to?(:id)
+          user.id
+        else
+          nil
+        end
+
         message = exception.message.inspect
         message << "\n* Extra Data\n\n#{data}" unless data.blank?
         e = create! \
@@ -15,7 +29,8 @@ module ExceptionLogger
           :action_name     => controller.action_name,
           :message         => message,
           :backtrace       => exception.backtrace,
-          :request         => controller.request
+          :request         => controller.request,
+          :user_id         => uid
       end
       
       def host_name
@@ -72,6 +87,7 @@ module ExceptionLogger
     end
     
     private
+
     @@rails_root      = Pathname.new(Rails.root).cleanpath.to_s
     @@backtrace_regex = /^#{Regexp.escape(@@rails_root)}/
 

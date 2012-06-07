@@ -20,6 +20,7 @@
             <span class="message"><%= h exception.message %></span>
           </td>
           <td class="time"><%= pretty_exception_date(exception) %></td>
+          <td class="time"><%= user_name(exception.user_id) %></td>
           <td><%= link_to 'Delete', { :action => 'destroy', :id => exception }, :method => :delete, :class => "util delete_link" %></td>
         </tr>
       <% end %>

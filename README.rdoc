@@ -28,6 +28,29 @@ Now, in your routes.rb:
 
 Note that "/exceptions" can be anything you like ;)
 
+=== Recording User Information
+
+If you'd like to record the user that caused the logged exception to be thrown.
+
+in config/application.rb:
+
+  config.after_initialize do
+    ExceptionLogger::LoggedExceptionsController.class_eval do
+      # A string representation of a method or property that contains 
+      # a reference to the model instance that should be considered 
+      # the Creator of the exception       
+      self.creator = "current_user"
+      
+      # A method that can be used to return a string value to
+      # be used by the views to display the Creator's information
+      #
+      # Note that the class that :creator belongs to should respond
+      # to the method 
+      self.creator_name = "full_name"
+    end
+  end
+
+
 == Exception Notification
 
 === by Email

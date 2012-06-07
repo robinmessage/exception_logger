@@ -1,6 +1,24 @@
 module ExceptionLogger
   class LoggedExceptionsController < ApplicationController
-    cattr_accessor :application_name
+    
+    cattr_accessor :application_name,
+                   # A string representation of a method or property that contains 
+                   # a reference to the model instance that should be considered 
+                   # the Creator of the exception 
+                   #
+                   # Examples:
+                   #   self.creator = "User.current"
+                   #   self.creator = "current_user"
+                   :creator,
+                   # A method that can be used to return a string value to
+                   # be used by the views to display the Creator's information
+                   #
+                   # Examples:
+                   #   self.creator_name = "full_name"
+                   #
+                   # Note that the class that :creator belongs to should respond
+                   # to the method defined in :creator_name
+                   :creator_name
 
     #ApplicationController.class_eval do
     #  rescue_from Exception, :with => :log_exception_handler
