@@ -6,8 +6,8 @@ If you're looking for the original gem, it is available at https://github.com/Qu
 
 == Installation
 
-`rake exception_logger:install:migrations`
-`rake db:migrate`
+  rake exception_logger:install:migrations
+  rake db:migrate
 
 If you've already been using the exception_logger gem, there's no need to run the migrations.
 
@@ -83,7 +83,6 @@ The generator which generates the rails app in your test directory will skip ove
 
 == Copyright
 
-Copyright (c) 2010 Roland Guem.
-Copyright (c) 2012 Alex Bevilacqua.
+Copyright (c) 2010 Roland Guem, 2012 Alex Bevilacqua.
 
 See LICENSE for details.
