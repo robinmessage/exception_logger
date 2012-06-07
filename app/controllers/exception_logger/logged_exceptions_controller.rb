@@ -70,6 +70,7 @@ module ExceptionLogger
     end
 
     private
+    
     def access_denied_with_basic_auth
       headers["Status"]           = "Unauthorized"
       headers["WWW-Authenticate"] = %(Basic realm="Web Password")
