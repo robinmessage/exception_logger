@@ -22,9 +22,8 @@ gem 'cucumber', '>= 0.8.5'
 gem 'launchy', '>= 0.3.7'
 
 # exception logger depends on:
-gem "will_paginate", ">= 3.0.pre2"
-gem "meta_where", ">= 0.5.2"
-gem "i18n", ">= 0.4.1"
+gem "kaminari"
+gem "squeel"
 
 # exception logger
 gem 'exception_logger'#, :path => '../..'

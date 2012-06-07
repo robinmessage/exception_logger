@@ -41,8 +41,8 @@ module ExceptionLoggableControllerMixin
       conditions << 'controller_name = ? AND action_name = ?'
       parameters += params[:controller_actions_filter].split('/').collect(&:downcase)
     end
-    @exceptions = LoggedException.paginate :order => 'created_at desc', :per_page => 30, 
-      :conditions => conditions.empty? ? nil : parameters.unshift(conditions * ' and '), :page => params[:page]
+
+    @exceptions = LoggedException.page(params[:page]).per(30).order('created_at desc').conditions(conditions.empty? ? nil : parameters.unshift(conditions * ' and ')
     
     respond_to do |format|
       format.html { redirect_to :action => 'index' unless action_name == 'index' }
