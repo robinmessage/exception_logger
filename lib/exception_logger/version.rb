@@ -1,3 +1,3 @@
 module ExceptionLogger
-  VERSION = "0.0.1.16"
+  VERSION = "1.0.0"
 end

@@ -11,8 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["roland.guem@gmail.com", "alexbevi@gmail.com"]
   s.homepage    = "http://github.com/alexbevi/exception_logger"
   s.summary     = "Exception Logging Rails3 Engine"
-  s.description = "Logs exceptions inside a database table. Now available as a gem for Rails3 (previously a plugin for Rails2)"
-  s.post_install_message = "\n_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_\n    Thank you for installing exception_logger.\n    Please be sure to read the README and HISTORY on\n        http://github.com/QuBiT/exception_logger\n    for important information about this release. Happy logging!\n_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_()_\n    "
+  s.description = "Logs exceptions inside a database table. Now available as an engine for Rails 3 (previously a plugin for Rails2)"
   s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
