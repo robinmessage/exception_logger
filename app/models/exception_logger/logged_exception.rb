@@ -78,16 +78,16 @@ module ExceptionLogger
       if request.is_a?(String)
         write_attribute :request, request
       else
-        max = request.env.keys.max { |a,b| a.length <=> b.length }
-        env = request.env.keys.sort.inject [] do |env, key|
-          env << '* ' + ("%-*s: %s" % [max.length, key, request.env[key].to_s.strip])
+        max = request.filtered_env.keys.max { |a,b| a.length <=> b.length }
+        env = request.filtered_env.keys.sort.inject [] do |env, key|
+          env << '* ' + ("%-*s: %s" % [max.length, key, request.filtered_env[key].to_s.strip])
         end
         write_attribute(:environment, (env << "* Process: #{$$}" << "* Server : #{self.class.host_name}") * "\n")
         
         write_attribute(:request, [
-            "* URL:#{" #{request.method.to_s.upcase}" unless request.get?} #{request.protocol}#{request.env["HTTP_HOST"]}#{request.fullpath}",
+            "* URL:#{" #{request.method.to_s.upcase}" unless request.get?} #{request.protocol}#{request.filtered_env["HTTP_HOST"]}#{request.filtered_path}",
             "* Format: #{request.format.to_s}",
-            "* Parameters: #{request.parameters.inspect}",
+            "* Parameters: #{request.filtered_parameters.inspect}",
             "* Rails Root: #{rails_root}"
           ] * "\n")
       end
