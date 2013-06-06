@@ -42,6 +42,14 @@ module ExceptionLogger
           :user_id         => uid
         end
       end
+
+      def create_outside_controller( where, what, exception, data, user = nil )
+        controller = OpenStruct.new :controller_path => where, :action_name => what, :request => ""
+        unless Exception === exception
+          exception = Exception.new exception
+          exception.set_backtrace []
+        end
+        self.create_from_exception( controller, exception, data, user )
       end
       
       def host_name
