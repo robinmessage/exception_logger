@@ -94,7 +94,7 @@ module ExceptionLogger
     end
 
     def controller_action
-      @controller_action ||= "#{controller_name.camelcase}/#{action_name}"
+      @controller_action ||= "#{controller_name.try :camelcase}/#{action_name}"
     end
 
     def self.class_names
