@@ -12,6 +12,14 @@ module ExceptionLogger
                     :user_id
 
     class << self
+      def silence
+        old_level = Rails.logger.level
+        Rails.logger.level = 1
+        yield
+      ensure
+        Rails.logger.level = old_level
+      end
+
       def create_from_exception(controller, exception, data, user)
         uid = if user.nil?
           nil
@@ -22,8 +30,9 @@ module ExceptionLogger
         end
 
         message = exception.message.inspect
-        message << "\n* Extra Data\n\n#{data}" unless data.blank?
-        e = create! \
+        message << "\n* Extra Data\n\n#{data.force_encoding('utf-8')}" unless data.blank?
+        silence do
+          e = create! \
           :exception_class => exception.class.name,
           :controller_name => controller.controller_path,
           :action_name     => controller.action_name,
@@ -31,6 +40,8 @@ module ExceptionLogger
           :backtrace       => exception.backtrace,
           :request         => controller.request,
           :user_id         => uid
+        end
+      end
       end
       
       def host_name
