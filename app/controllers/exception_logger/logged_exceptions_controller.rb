@@ -18,7 +18,9 @@ module ExceptionLogger
                    #
                    # Note that the class that :creator belongs to should respond
                    # to the method defined in :creator_name
-                   :creator_name
+                   :creator_name,
+                   # The class that creator will have (since we only serialize the id)
+                   :creator_klass
 
     #ApplicationController.class_eval do
     #  rescue_from Exception, :with => :log_exception_handler

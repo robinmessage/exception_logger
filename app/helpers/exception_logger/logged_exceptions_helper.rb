@@ -41,8 +41,7 @@ module ExceptionLogger
 
     def user_name(id)
       begin
-        klass = ExceptionLogger::LoggedExceptionsController.creator
-        klass = send(klass.to_sym).class
+        klass = ExceptionLogger::LoggedExceptionsController.creator_klass
         record = klass.find(id)
         fn = ExceptionLogger::LoggedExceptionsController.creator_name
         if record.respond_to?(fn)
